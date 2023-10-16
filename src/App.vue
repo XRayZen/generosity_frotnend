@@ -1,24 +1,23 @@
 <script setup>
-  const link = 'https://google.com';
+const users = [
+  { id: 1, name: 'John Doe', email: 'john@test.com', admin: true },
+  { id: 2, name: 'Jane Doe', email: 'jane@example.com', admin: false },
+  { id: 3, name: 'Kevin MacDonald', email: 'kevin@test.com', admin: false },
+];
 </script>
 
 <template>
-  <h1>Vue 3 入門</h1>
-  <div>
-    <a v-bind:href="link">Google</a>
+  <div class="parent">
+    <div v-for="user in users" :key="user.id" class="child"> {{ user.id }}:{{ user.name }}({{ user.email }})</div>
   </div>
 </template>
 
 <style scoped>
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
+.parent {
+  display: flex;
+  flex-direction: column;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.child {
+  padding: 10px;
 }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
 </style>
