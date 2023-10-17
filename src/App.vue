@@ -1,15 +1,16 @@
 <script setup>
-const users = [
-  { id: 1, name: 'John Doe', email: 'john@test.com', admin: true },
-  { id: 2, name: 'Jane Doe', email: 'jane@example.com', admin: false },
-  { id: 3, name: 'Kevin MacDonald', email: 'kevin@test.com', admin: false },
-];
+  import { ref, watchEffect } from 'vue';
+
+  const count = ref(0);
+  const count2 = ref(100);
+
+  watchEffect(() => console.log(`${count.value}/${count2.value}`));
 </script>
 
 <template>
-  <div class="parent">
-    <div v-for="user in users" :key="user.id" class="child"> {{ user.id }}:{{ user.name }}({{ user.email }})</div>
-  </div>
+  <h1>Vue 3 入門</h1>
+  <button @click="count++">Count:{{ count }}</button>
+  <button @click="count2++">Count2:{{ count2 }}</button>
 </template>
 
 <style scoped>
