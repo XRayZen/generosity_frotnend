@@ -1,24 +1,20 @@
 <script setup>
-  import { ref, computed } from 'vue';
-  import Tokyo from './components/Tokyo.vue';
-  import Kyoto from './components/Kyoto.vue';
+import CompA from './components/CompA.vue';
+import { provide, ref } from 'vue';
 
-  const city = ref('tokyo');
+const count = ref(0);
 
-  const tabs = {
-    tokyo: Tokyo,
-    kyoto: Kyoto,
-  };
-  const tab = computed(() => tabs[city.value]);
+const addCount = () => {
+  count.value++;
+};
+
+provide('count', count);
+provide('addCount', addCount);
 </script>
 
 <template>
   <h1>Vue 3 入門</h1>
-  <div>
-    <button @click="city = 'tokyo'">東京</button>
-    <button @click="city = 'kyoto'">京都</button>
-  </div>
-  <keep-alive> <component v-bind:is="tab"></component></keep-alive>
+  <CompA message="propsでデータ渡し" />
 </template>
 
 <style scoped>
