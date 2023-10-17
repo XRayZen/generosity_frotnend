@@ -6,21 +6,37 @@ import fs from 'fs'
 
 describe('FetchApiTest', () => {
   it('fetches data from API', async () => {
-    // プロジェクトルート直下にAPIKEY.mdの内容を読み込む
+    // プロジェクトルート直下APIKEY.mdの内容を読み込む
     const apiKeyPath = './APIKEY.md'
     const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
     // axiosでAPIを叩く
-    const res = await FetchApi('prefectures', apiKey)
-    console.log("api status:"+res.status)
-    expect(res.data.result.length).toBeGreaterThan(5)
+    const res = await FetchPrefectures(apiKey)
+    console.log("api data:"+res[0].name)
+    expect(res.length).toBeGreaterThan(5)
   })
 })
+
+async function FetchPrefectures(ACCESS_TOKEN) {
+  try {
+    const response = await FetchApi('prefectures', ACCESS_TOKEN)
+    return response.data.result.map(val => {
+      return {
+        id: val["prefCode"],
+        name: val["prefName"],
+        isChecked: false
+      };
+    });
+  } catch (error) {
+    console.error(error.message)
+  }
+}
 
 async function FetchApi(path, ACCESS_TOKEN) {
   try {
     const response = await axios.get(`https://opendata.resas-portal.go.jp/api/v1/${path}`, {
       headers: { 'X-API-KEY': ACCESS_TOKEN }
     })
+    console.log("api status:"+response.status)
     return response
   } catch (error) {
     console.error(error.message)
