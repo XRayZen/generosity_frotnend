@@ -12,6 +12,7 @@ describe('FetchApiTest', () => {
     // axiosでAPIを叩く
     const res = await FetchPrefectures(apiKey)
     console.log("api data:"+res[0].name)
+    // 無事にデータが取得できているか確認
     expect(res.length).toBeGreaterThan(5)
   })
 })

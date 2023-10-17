@@ -1,5 +1,4 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <h1>Vue 3 入門</h1>
@@ -19,7 +18,7 @@ h1 {
 h2 {
   font-size: 17px;
 }
-
+/* 解像度が狭くなったら適用する */
 @media screen and (max-width: 425px) {
   h1 {
     font-size: 18px;
