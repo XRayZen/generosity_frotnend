@@ -1,8 +1,6 @@
-// import { mount } from '@vue/test-utils'
-// import axios from 'axios'
+
 import { describe, it, expect } from 'vitest'
 import fs from 'fs'
-// import path from 'path'
 import FetchApi from '../FetchApi.vue'
 
 describe('FetchApiTest', () => {
@@ -29,6 +27,7 @@ describe('FetchApiTest', () => {
     const populationData = await FetchApi.methods.FetchPopulationTrend(prefectureCode, apiKey)
     console.log('population 0 year:' + populationData[0].year + ' value:' + populationData[0].value)
     // 取得したデータが正しい形式であることを確認する
-    expect(populationData[0].value).toBeGreaterThan(0)
+    expect(populationData[0].value).toBeGreaterThan(100)
+    expect(populationData[0].year).toBeGreaterThan(100)
   })
 })

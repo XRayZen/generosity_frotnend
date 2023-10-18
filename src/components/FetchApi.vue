@@ -20,6 +20,7 @@ export default {
         console.error(error.message)
       }
     },
+
     // 人口推移を取得する
     async FetchPopulationTrend(prefCode, ACCESS_TOKEN) {
       try {
