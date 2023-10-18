@@ -6,7 +6,7 @@ import CheckBoxPrefectures from './components/CheckBoxPrefectures.vue'
   <div id="app">
     <h1>都道府県別総人口推移グラフ</h1>
     <h3>フロントエンド技術課題</h3>
-    <h2>都道府県を選択してください</h2>
+    <h2>都道府県を選択してください（複数可）</h2>
     <CheckBoxPrefectures />
   </div>
 </template>

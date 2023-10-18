@@ -16,9 +16,16 @@ export default {
   },
   methods: {
     // チェックボックスの状態を変更する
-    ChangeCheckState(prefCode) {
-      const prefecture = this.prefectures.find((val) => val.id === prefCode)
-      prefecture.isChecked = !prefecture.isChecked
+    onCheckBox(id, name, isChecked) {
+      // 都道府県リストのis_checkedはデフォでfalseなので反転させる
+      if (isChecked) {
+        this.prefectures[id - 1].isChecked = false
+      } else {
+        this.prefectures[id - 1].isChecked = true
+      }
+      console.log(
+        name + ' ID:' + id + ' のチェックボックスが' + this.prefectures[id - 1].isChecked + 'に変更されました'
+      )
     },
     // 初期表示
     init: async function () {
@@ -37,16 +44,18 @@ export default {
 </script>
 
 <template>
-  <div v-for="prefecture in prefectures" :key="prefecture.id" class="prefecture">
-    <label :for="prefecture.id">
-      <input
-        type="checkbox"
-        :id="prefecture.id"
-        :checked="prefecture.isChecked"
-        @click="onCheckBox(prefecture.id, prefecture.name, prefecture.isChecked)"
-      />
-      {{ prefecture.name }}
-    </label>
+  <div class="prefectures_area">
+    <div v-for="prefecture in prefectures" :key="prefecture.id" class="prefecture">
+      <label :for="prefecture.id">
+        <input
+          type="checkbox"
+          :id="prefecture.id"
+          :checked="prefecture.isChecked"
+          @click="onCheckBox(prefecture.id, prefecture.name, prefecture.isChecked)"
+        />
+        {{ prefecture.name }}
+      </label>
+    </div>
   </div>
 </template>
 
@@ -54,7 +63,26 @@ export default {
 .prefectures {
   font-size: 15px;
 }
+.prefectures_area {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+/* カーソルが近づいたらポインターにする */
 label {
   cursor: pointer;
+}
+/* 解像度が狭くなったら適用 */
+@media screen and (max-width: 425px) {
+  .prefectures_area {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .prefectures {
+    font-size: 13px;
+  }
+  label {
+    cursor: pointer;
+    font-size: small;
+  }
 }
 </style>
