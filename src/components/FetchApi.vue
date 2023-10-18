@@ -1,5 +1,5 @@
 <script>
-import fs from 'fs'
+// import fs from 'fs'
 import axios from 'axios'
 
 //他のコンポーネントで利用できる様にするためexport
@@ -53,10 +53,11 @@ export default {
     },
 
     // プロジェクトルート直下APIKEY.mdの内容を読み込む
-    async ReadApiKey() {
-      const apiKeyPath = './APIKEY.md'
-      const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
-      return apiKey
+    ReadApiKey() {
+      // const apiKeyPath = './APIKEY.md'
+      // const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
+      // return apiKey
+      return import.meta.env.VITE_API_KEY
     }
   }
 }

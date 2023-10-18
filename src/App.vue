@@ -1,7 +1,14 @@
-<script setup></script>
+<script setup>
+import CheckBoxPrefectures from './components/CheckBoxPrefectures.vue'
+</script>
 
 <template>
-  <h1>Vue 3 入門</h1>
+  <div id="app">
+    <h1>都道府県別総人口推移グラフ</h1>
+    <h3>フロントエンド技術課題</h3>
+    <h2>都道府県を選択してください</h2>
+    <CheckBoxPrefectures />
+  </div>
 </template>
 
 <style scoped>
@@ -15,7 +22,13 @@ h1 {
   font-size: 20px;
 }
 
+h3 {
+  text-align: center;
+  font-size: 17px;
+}
+
 h2 {
+  text-align: center;
   font-size: 17px;
 }
 /* 解像度が狭くなったら適用する */
@@ -26,6 +39,10 @@ h2 {
 
   h2 {
     font-size: 15px;
+  }
+
+  h3 {
+    font-size: 12px;
   }
 }
 </style>
