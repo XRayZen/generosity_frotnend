@@ -6,7 +6,9 @@
 
 >[Vue.js Piniaを使って状態管理(データの共有)を行ってみよう](https://reffect.co.jp/vue/vue-pinia/)
 
-src フォルダに store フォルダを作成しその下に countStore.js ファイルを作成します。countStore.js ファイルでは reactive 関数を利用して count の初期値と addCount を設定します。設定した counter は他のファイルでも利用できるように export を行う必要があります。
+src フォルダに store フォルダを作成しその下に countStore.js ファイルを作成します。
+- countStore.js ファイルでは reactive 関数を利用して count の初期値と addCount を設定します。
+- 設定した counter は他のファイルでも利用できるように export を行う必要があります。
 ```javascript
 import { reactive } from 'vue';
 
