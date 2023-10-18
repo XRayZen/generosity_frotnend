@@ -3,7 +3,7 @@
 GENEROSITYのフロントエンド技術課題
 
 # 使用技術
-- Vue.js 3 (Composition API)
+- Vue.js 3 (Composition API) : Ver 3.3.4
 - javascript
 - Vite
 - axios(API通信) : Ver 1.5.1
