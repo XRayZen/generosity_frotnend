@@ -1,40 +1,12 @@
-# generosity_frotnend
+# generosity_frontend
 
 GENEROSITYのフロントエンド技術課題
 
-This template should help get you started developing with Vue 3 in Vite.
+# 使用技術
+- Vue.js 3 (Composition API)
+- javascript
+- Vite
+- axios(API通信) : Ver 1.5.1
+- highcharts : Ver 11.1.0
+- highcharts-vue : Ver 1.4.3
 
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
