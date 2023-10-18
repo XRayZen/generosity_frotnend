@@ -1,5 +1,4 @@
 <script>
-// import fs from 'fs'
 import axios from 'axios'
 
 //他のコンポーネントで利用できる様にするためexport

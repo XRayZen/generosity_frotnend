@@ -1,5 +1,3 @@
-<!-- https://github.com/highcharts/highcharts-vueを参考に実装 -->
-
 <template>
   <div>
     <highcharts :options="options"></highcharts>
@@ -75,11 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.checkbox_is_data_label_enabled {
-  /* cursor: pointer; */
-  text-align: center;
-  padding: 10px;
-}
-</style>

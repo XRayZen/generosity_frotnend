@@ -16,7 +16,7 @@
 
 <script>
 import FetchApi from './FetchApi.vue'
-// App.vueでメソッドを実行するためにexport
+
 export default {
   data() {
     return {
@@ -53,7 +53,6 @@ export default {
     // 初期表示
     init: async function () {
       try {
-        // APIから都道府県データを取得する
         const apiKey = FetchApi.methods.ReadApiKey()
         this.prefectures = await FetchApi.methods.FetchPrefectures(apiKey)
       } catch (error) {
@@ -72,7 +71,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-/* カーソルが近づいたらポインターにする */
 label {
   cursor: pointer;
 }

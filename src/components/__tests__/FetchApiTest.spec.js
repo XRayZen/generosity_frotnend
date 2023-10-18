@@ -1,14 +1,11 @@
 
 import { describe, it, expect } from 'vitest'
-import fs from 'fs'
 import FetchApi from '../FetchApi.vue'
 
 describe('FetchApiTest', () => {
   // APIデータを取得できるかテスト
   it('fetches data from API', async () => {
-    // プロジェクトルート直下APIKEY.mdの内容を読み込む
-    const apiKeyPath = './APIKEY.md'
-    const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
+    const apiKey = FetchApi.methods.ReadApiKey()
     // インポートしているコンポーネントから関数を呼び出してaxiosでAPIを叩く
     const res = await FetchApi.methods.FetchPrefectures(apiKey)
     console.log('api data:' + res[0].name)
@@ -18,10 +15,7 @@ describe('FetchApiTest', () => {
 
   // 人口推移データを取得できるかテスト
   it('fetches population data from API', async () => {
-    // プロジェクトルート直下のAPIキーを読み込む
-    const apiKeyPath = './APIKEY.md'
-    const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
-
+    const apiKey = FetchApi.methods.ReadApiKey()
     // 都道府県コードを指定して人口推移データを取得する
     const prefectureCode = '13' // 東京都のコード
     const populationData = await FetchApi.methods.FetchPopulationTrend(prefectureCode, apiKey)
