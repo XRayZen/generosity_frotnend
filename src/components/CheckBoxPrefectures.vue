@@ -49,7 +49,6 @@ export default {
           population.map((val) => val['value'])
         )
       }
-      console.log(name + ' ID:' + id + 'のチェックボックスが' + this.prefectures[id - 1].isChecked + 'に変更されました')
     },
     // 初期表示
     init: async function () {

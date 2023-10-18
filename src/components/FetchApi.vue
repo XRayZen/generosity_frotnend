@@ -45,7 +45,6 @@ export default {
         const response = await axios.get(`https://opendata.resas-portal.go.jp/api/v1/${path}`, {
           headers: { 'X-API-KEY': ACCESS_TOKEN }
         })
-        console.log('api status:' + response.status)
         return response
       } catch (error) {
         console.error(error.message)
