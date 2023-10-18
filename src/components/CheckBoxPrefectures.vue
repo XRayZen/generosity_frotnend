@@ -2,7 +2,6 @@
 
 <script>
 import FetchApi from './FetchApi.vue'
-
 // App.vueでメソッドを実行するためにexport
 export default {
   data() {
@@ -16,12 +15,22 @@ export default {
   },
   methods: {
     // チェックボックスの状態を変更する
-    onCheckBox(id, name, isChecked) {
+    onCheckBox: async function (id, name, isChecked) {
       // 都道府県リストのis_checkedはデフォでfalseなので反転させる
       if (isChecked) {
         this.prefectures[id - 1].isChecked = false
+        // チェックが外されたのでチャートを非表示にする
+        this.$emit('onRemoveSeries', id)
       } else {
         this.prefectures[id - 1].isChecked = true
+        // チェックが入ったのでデータを取得してチャートを表示する
+        const population = await FetchApi.methods.FetchPopulationTrend(id, FetchApi.methods.ReadApiKey())
+        // 親コンポーネントのを呼び出す
+        this.$emit(
+          'onAddCategories',
+          population.map((val) => val['year'])
+        )
+        this.$emit('onAddSeries', id, name, population.map((val) => val['value']))
       }
       console.log(
         name + ' ID:' + id + ' のチェックボックスが' + this.prefectures[id - 1].isChecked + 'に変更されました'

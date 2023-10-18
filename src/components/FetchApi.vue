@@ -29,12 +29,15 @@ export default {
           `population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
           ACCESS_TOKEN
         )
+        // return response.data.result.data[0].data.map(
+        //   val => val["value"]
+        // );
         return response.data.result.data[0].data.map((val) => {
           return {
             year: val['year'],
             value: val['value']
           }
-        })
+        });
       } catch (error) {
         console.error(error.message)
       }
