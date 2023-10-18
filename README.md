@@ -15,6 +15,7 @@ GENEROSITYのフロントエンド技術課題
 
 # セキュリティ
 - RESAS APIのAPIキーはVercelの環境変数に保存して、`import.meta.env.VITE_API_KEY`から取得するようにした
+  - 念を入れてRESAS APIの登録時に発行されてAPIキーを無効化して再発行したのを使っている
 - ローカルでの開発時に使う`.env`は`.gitignore`に追加して、対象から外してGithubには上げないようにした
 >src/components/FetchApi.vue
 ```javascript
