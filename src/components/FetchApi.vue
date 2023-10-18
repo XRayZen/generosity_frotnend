@@ -29,9 +29,6 @@ export default {
           `population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
           ACCESS_TOKEN
         )
-        // return response.data.result.data[0].data.map(
-        //   val => val["value"]
-        // );
         return response.data.result.data[0].data.map((val) => {
           return {
             year: val['year'],
@@ -55,11 +52,7 @@ export default {
       }
     },
 
-    // プロジェクトルート直下APIKEY.mdの内容を読み込む
     ReadApiKey() {
-      // const apiKeyPath = './APIKEY.md'
-      // const apiKey = fs.readFileSync(apiKeyPath, 'utf8')
-      // return apiKey
       return import.meta.env.VITE_API_KEY
     }
   }

@@ -8,10 +8,10 @@
 
 <script>
 import { Chart } from 'highcharts-vue'
-import {ref} from 'vue'
+import { ref } from 'vue'
 
-let series=ref([])
-let categories=ref([])
+let series = ref([])
+let categories = ref([])
 
 export default {
   components: {
@@ -20,32 +20,31 @@ export default {
   data() {
     return {
       options: {
+        // https://stackoverflow.com/questions/72829525/react-highchart-how-set-the-accessibility-enabled-option-to-false
+        // で解決
+        accessibility: {
+          enabled: false
+        },
         // ここに都道府県の人口データを入れる
-        // どうやってデータを入れるか
         series: series,
         title: {
           style: {
-            display: 'none'
+            display: 'none',
           }
         },
         xAxis: {
-          // ここに都道府県の年度を入れる
+          title: {
+            text: '年度'
+          },
+          // 年度を入れる
           categories: categories
-          // props.categories
         },
         yAxis: {
           title: {
             text: '人口数'
           }
         },
-        plotOptions: {
-          line: {
-            dataLabels: {
-              enabled: true
-            },
-            enableMouseTracking: true
-          }
-        },
+        // 凡例を右上に表示
         legend: {
           layout: 'vertical',
           align: 'right',
@@ -57,32 +56,18 @@ export default {
   methods: {
     // シリーズを追加
     addSeries: function (id, name, population) {
-      console.log('addSeries id: ' + id + ' name: ' + name + ' population length: ' + population.length)
-      // APIからのレスポンスは正常
-      // 配列に追加出来ていない
-      console.log(population)
-      // this.options.series.push({
-      //   // id: id,
-      //   name: name,
-      //   data: population
-      // })
-      // this.options.series.push[{
-      //   name: name,
-      //   data: population
-      // }]
       series.value.push({
+        id: id,
         name: name,
         data: population
       })
-      console.log(this.options.series)
     },
-    // カテゴリーを追加
-    addCategories: function (categories) {
-      // this.options.xAxis.categories = categories
-      console.log(categories)
-      categories.value= categories
+    // カテゴリー(年度)を追加
+    addCategories: function (categoriesArray) {
+      categoriesArray.forEach((category) => {
+        categories.value.push(category)
+      })
     },
-
     // シリーズから削除
     removeSeries: function (id) {
       series.value = series.value.filter((series) => series.id !== id)
@@ -90,3 +75,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.checkbox_is_data_label_enabled {
+  /* cursor: pointer; */
+  text-align: center;
+  padding: 10px;
+}
+</style>

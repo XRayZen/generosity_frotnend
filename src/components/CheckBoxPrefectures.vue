@@ -1,57 +1,3 @@
-<!-- AsyncSetupは使いずらく、口数がかかるので普通のスクリプトにしてマウントされたら実行 -->
-
-<script>
-import FetchApi from './FetchApi.vue'
-// App.vueでメソッドを実行するためにexport
-export default {
-  data() {
-    return {
-      prefectures: []
-    }
-  },
-  // マウントされたら実行
-  mounted() {
-    this.init()
-  },
-  methods: {
-    // チェックボックスの状態を変更する
-    onCheckBox: async function (id, name, isChecked) {
-      // 都道府県リストのis_checkedはデフォでfalseなので反転させる
-      if (isChecked) {
-        this.prefectures[id - 1].isChecked = false
-        // チェックが外されたのでチャートを非表示にする
-        this.$emit('onRemoveSeries', id)
-      } else {
-        this.prefectures[id - 1].isChecked = true
-        // チェックが入ったのでデータを取得してチャートを表示する
-        const population = await FetchApi.methods.FetchPopulationTrend(id, FetchApi.methods.ReadApiKey())
-        // 親コンポーネントのを呼び出す
-        this.$emit(
-          'onAddCategories',
-          population.map((val) => val['year'])
-        )
-        this.$emit('onAddSeries', id, name, population.map((val) => val['value']))
-      }
-      console.log(
-        name + ' ID:' + id + ' のチェックボックスが' + this.prefectures[id - 1].isChecked + 'に変更されました'
-      )
-    },
-    // 初期表示
-    init: async function () {
-      try {
-        // APIから都道府県データを取得する
-        const apiKey = FetchApi.methods.ReadApiKey()
-        // データをバインドしてある変数に格納する
-        // そのデータをもとにチェックボックスを作成する
-        this.prefectures = await FetchApi.methods.FetchPrefectures(apiKey)
-      } catch (error) {
-        console.error(error.message)
-      }
-    }
-  }
-}
-</script>
-
 <template>
   <div class="prefectures_area">
     <div v-for="prefecture in prefectures" :key="prefecture.id" class="prefecture">
@@ -67,6 +13,57 @@ export default {
     </div>
   </div>
 </template>
+
+<script>
+import FetchApi from './FetchApi.vue'
+// App.vueでメソッドを実行するためにexport
+export default {
+  data() {
+    return {
+      prefectures: []
+    }
+  },
+  // マウントされたら実行
+  mounted() {
+    this.init()
+  },
+  methods: {
+    onCheckBox: async function (id, name, isChecked) {
+      // 都道府県リストのis_checkedはデフォでfalseなので反転させる
+      if (isChecked) {
+        this.prefectures[id - 1].isChecked = false
+        // チェックが外されたのでチャートを非表示にする
+        this.$emit('onRemoveSeries', id)
+      } else {
+        // チェックが入ったのでデータを取得してチャートを表示する
+        this.prefectures[id - 1].isChecked = true
+        const population = await FetchApi.methods.FetchPopulationTrend(id, FetchApi.methods.ReadApiKey())
+        this.$emit(
+          'onAddCategories',
+          population.map((val) => val['year'])
+        )
+        this.$emit(
+          'onAddSeries',
+          id,
+          name,
+          population.map((val) => val['value'])
+        )
+      }
+      console.log(name + ' ID:' + id + 'のチェックボックスが' + this.prefectures[id - 1].isChecked + 'に変更されました')
+    },
+    // 初期表示
+    init: async function () {
+      try {
+        // APIから都道府県データを取得する
+        const apiKey = FetchApi.methods.ReadApiKey()
+        this.prefectures = await FetchApi.methods.FetchPrefectures(apiKey)
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 .prefectures {

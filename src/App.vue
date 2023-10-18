@@ -11,24 +11,15 @@ export default {
   methods: {
     // シリーズを追加
     addSeries: function (id, name, population) {
-      console.log("addSeries")
       ChartPopulation.methods.addSeries(id, name, population)
-      // this.series.value.push({
-      //   id: id,
-      //   name: name,
-      //   data: population
-      // })
     },
     // カテゴリーを追加
     addCategories: function (categories) {
-      console.log("addCategories")
       ChartPopulation.methods.addCategories(categories)
-      // this.data.categories.value.push(categories)
     },
     // シリーズを削除
     removeSeries: function (id) {
-      console.log("removeSeries")
-      this.options.series = this.options.series.filter((val) => val.id !== id)
+      ChartPopulation.methods.removeSeries(id)
     }
   }
 }
