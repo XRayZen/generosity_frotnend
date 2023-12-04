@@ -1,6 +1,6 @@
-# generosity_frontend
+# RESAS APIで都道府県別の人口推移を表示
 
-GENEROSITYのフロントエンド技術課題
+Vue.jsでRESAS　APIから取得した都道府県の総人口推移を動的に表示します
 
 # 使用技術
 - Vue.js 3 (Composition API) : Ver 3.3.4
